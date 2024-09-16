@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35315.17
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer", "RazorAnalyzer\RazorAnalyzer.csproj", "{EF78BAC3-0BA3-401D-8285-E75B44C38481}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer", "src\RazorAnalyzer\RazorAnalyzer.csproj", "{EF78BAC3-0BA3-401D-8285-E75B44C38481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer.CodeFixes", "RazorAnalyzer.CodeFixes\RazorAnalyzer.CodeFixes.csproj", "{99737DF6-0400-4833-BBCD-553D6A2A84EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer.CodeFixes", "src\RazorAnalyzer.CodeFixes\RazorAnalyzer.CodeFixes.csproj", "{99737DF6-0400-4833-BBCD-553D6A2A84EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer.Package", "RazorAnalyzer.Package\RazorAnalyzer.Package.csproj", "{BC065CF5-40E5-4860-9680-BDBC373D7BFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer.Package", "src\RazorAnalyzer.Package\RazorAnalyzer.Package.csproj", "{BC065CF5-40E5-4860-9680-BDBC373D7BFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer.Test", "RazorAnalyzer.Test\RazorAnalyzer.Test.csproj", "{AE1E540D-1F72-4179-8837-AD4CD76AFF50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorAnalyzer.Test", "src\RazorAnalyzer.Test\RazorAnalyzer.Test.csproj", "{AE1E540D-1F72-4179-8837-AD4CD76AFF50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBlazorApp", "TestBlazorApp\TestBlazorApp.csproj", "{CB8987C7-62E7-4B9C-8C54-4767437D8417}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBlazorApp", "src\TestBlazorApp\TestBlazorApp.csproj", "{CB8987C7-62E7-4B9C-8C54-4767437D8417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
