@@ -55,6 +55,24 @@ public class AnalyzerTests
                 Location.Create("Index.razor", new TextSpan(18, 3), new LinePositionSpan(new LinePosition(2, 0), new LinePosition(2, 3)))
             )
         );
+
+    [Fact]
+    public Task VirtualizeInTbody()
+        => TestAsync("""
+            @page "/index"
+
+            <table>
+                <tbody>
+                    <Virtualize></Virtualize>
+                </tbody>
+            </table>
+            """,
+            "Index.razor",
+            Diagnostic.Create(
+                VirtualizeAnalyzer.Descriptor,
+                Location.Create("Index.razor", new TextSpan(48, 12), new LinePositionSpan(new LinePosition(4,8), new LinePosition(4, 20)))
+            )
+        );
             
 
     private static async Task TestAsync(string input, string filePath, params Diagnostic[] expectedDiagnostics)

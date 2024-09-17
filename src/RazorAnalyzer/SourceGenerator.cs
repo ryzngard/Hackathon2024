@@ -20,10 +20,11 @@ namespace RazorAnalyzer;
 [Generator]
 public sealed class SourceGenerator() : IIncrementalGenerator
 {
-    private readonly ImmutableArray<IRazorAnalyzer> _razorAnalyzers =
+    private static readonly ImmutableArray<IRazorAnalyzer> s_razorAnalyzers =
         [
             new LowerCaseHTMLAnalyzer(),
             new CodeBlockStylingAnalyzer(),
+            new VirtualizeAnalyzer(),
         ];
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -242,7 +243,7 @@ public sealed class SourceGenerator() : IIncrementalGenerator
                     document = projectEngine.Process(sourceItem);
                     var diagnostics = new List<Diagnostic>();
 
-                    foreach (var analyzer in _razorAnalyzers)
+                    foreach (var analyzer in s_razorAnalyzers)
                     {
                         diagnostics.AddRange(analyzer.GetDiagnostics(document));
                     }

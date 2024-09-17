@@ -5,12 +5,13 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>RazorAnalyzer</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>ryzng</Authors>
+    <PackageVersion>0.0.0.3</PackageVersion>
+    <Authors>ryzngard</Authors>
     <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
     <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
     <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
@@ -28,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RazorAnalyzer\RazorAnalyzer.csproj" />
+    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.8" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +39,9 @@
   <Target Name="_AddAnalyzersToOutput">
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(OutputPath)\RazorAnalyzer.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\Microsoft.CodeAnalysis.Razor.Compiler.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\Microsoft.AspNetCore.Razor.Utilities.Shared.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\Microsoft.Extensions.ObjectPool.dll" PackagePath="analyzers/dotnet/cs" />
     </ItemGroup>
   </Target>
 
