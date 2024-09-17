@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
-using Microsoft.NET.Sdk.Razor.SourceGenerators;
 
 namespace RazorAnalyzer.Test
 {
@@ -30,7 +29,7 @@ namespace RazorAnalyzer.Test
 
             protected override IEnumerable<Type> GetSourceGenerators()
             {
-                yield return typeof(RazorSourceGenerator);
+                yield return typeof(SourceGenerator);
             }
         }
     }

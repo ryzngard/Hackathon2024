@@ -1,0 +1,33 @@
+﻿using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.CodeAnalysis.CSharp;
+
+namespace RazorAnalyzer;
+
+internal sealed record RazorSourceGenerationOptions
+{
+    public string RootNamespace { get; set; } = "ASP";
+
+    public RazorConfiguration Configuration { get; set; } = RazorConfiguration.Default;
+
+    /// <summary>
+    /// Gets a flag that determines if generated Razor views and Pages includes the <c>RazorSourceChecksumAttribute</c>.
+    /// </summary>
+    public bool GenerateMetadataSourceChecksumAttributes { get; set; } = false;
+
+    /// <summary>
+    /// Gets the CSharp language version currently used by the compilation.
+    /// </summary>
+    public LanguageVersion CSharpLanguageVersion { get; set; } = LanguageVersion.CSharp10;
+
+    /// <summary>
+    /// Gets a flag that determines if localized component names should be supported.
+    /// </summary>
+    public bool SupportLocalizedComponentNames { get; set; } = false;
+
+    /// <summary>
+    /// Gets the flag that should be set on code documents to replace unique ids for testing purposes
+    /// </summary>
+    internal string? TestSuppressUniqueIds { get; set; }
+
+    public override int GetHashCode() => Configuration.GetHashCode();
+}

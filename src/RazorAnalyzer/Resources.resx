@@ -129,4 +129,10 @@
     <value>Type name contains lowercase letters</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="MetadataReferenceNotProvidedTitle" xml:space="preserve">
+    <value>MetadataReferenceNotProvidedTitle</value>
+  </data>
+  <data name="MetadataReferenceNotProvidedMessage" xml:space="preserve">
+    <value>MetadataReferenceNotProvidedMessage</value>
+  </data>
 </root>

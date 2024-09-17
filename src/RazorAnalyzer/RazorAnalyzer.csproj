@@ -1,22 +1,41 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
 
-    <!-- Avoid ID conflicts with the package project. -->
-    <PackageId>*$(MSBuildProjectFile)*</PackageId>
-  </PropertyGroup>
+        <!-- Avoid ID conflicts with the package project. -->
+        <PackageId>*$(MSBuildProjectFile)*</PackageId>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.33" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.8" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.3.1" />
-  </ItemGroup>
+        <!-- 👇 We don't want to reference the source generator dll directly in consuming projects -->
+        <IncludeBuildOutput>false</IncludeBuildOutput>
 
-  <ItemGroup>
-    <Compile Update="Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />
-    <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
-  </ItemGroup>
+        <Nullable>Enable</Nullable>
+        <LangVersion>Latest</LangVersion>
+        
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources.Designer.cs" DesignTime="True" AutoGen="True" DependentUpon="Resources.resx" />
+        <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
+    </ItemGroup>
+
+    <!-- This ensures the library will be packaged as a source generator when we use `dotnet pack` -->
+    <ItemGroup>
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="Microsoft.CodeAnalysis.Razor.Compiler">
+        <HintPath>..\..\..\razor\artifacts\bin\Microsoft.CodeAnalysis.Razor.Compiler\Debug\netstandard2.0\Microsoft.CodeAnalysis.Razor.Compiler.dll</HintPath>
+      </Reference>
+    </ItemGroup>
 
 </Project>

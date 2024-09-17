@@ -13,4 +13,8 @@
         </ProjectReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Basic.Reference.Assemblies.Net80" Version="1.7.8" />
+    </ItemGroup>
+
 </Project>
