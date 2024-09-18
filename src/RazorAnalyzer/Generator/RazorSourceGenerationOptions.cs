@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal sealed record RazorSourceGenerationOptions
 {

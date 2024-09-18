@@ -33,8 +33,14 @@ namespace RazorAnalyzer
             context.EnableConcurrentExecution();
 
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            context.RegisterCodeBlockAction(CodeBlockAction);
             context.RegisterCompilationAction(AnalyzeCompilation);
             context.RegisterSemanticModelAction(AnalyzeSemanticModel);
+        }
+
+        private void CodeBlockAction(CodeBlockAnalysisContext context)
+        {
+            throw new NotImplementedException();
         }
 
         private void AnalyzeSemanticModel(SemanticModelAnalysisContext context)

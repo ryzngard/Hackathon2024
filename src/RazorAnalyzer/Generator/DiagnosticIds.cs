@@ -1,4 +1,4 @@
-﻿namespace RazorAnalyzer;
+﻿namespace RazorAnalyzer.Generator;
 
 internal static class DiagnosticIds
 {

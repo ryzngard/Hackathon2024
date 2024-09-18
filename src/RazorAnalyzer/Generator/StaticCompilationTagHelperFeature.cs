@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal sealed class StaticCompilationTagHelperFeature(Compilation compilation)
         : RazorEngineFeatureBase, ITagHelperFeature

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal sealed class LambdaComparer<T> : IEqualityComparer<T>
 {

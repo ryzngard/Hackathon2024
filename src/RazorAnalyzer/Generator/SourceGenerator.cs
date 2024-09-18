@@ -15,16 +15,17 @@ using Microsoft.CodeAnalysis.Razor;
 
 using RazorAnalyzer.Analyzers;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 [Generator]
 public sealed class SourceGenerator() : IIncrementalGenerator
 {
     private static readonly ImmutableArray<IRazorAnalyzer> s_razorAnalyzers =
         [
-            new LowerCaseHTMLAnalyzer(),
+            new LowercaseHTMLAnalyzer(),
             new CodeBlockStylingAnalyzer(),
             new VirtualizeAnalyzer(),
+            new DisposableComponent(),
         ];
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -238,8 +239,6 @@ public sealed class SourceGenerator() : IIncrementalGenerator
                 .Select((pair, _) =>
                 {
                     var (projectEngine, sourceItem, document) = pair;
-
-                    var kind = designTime ? "DesignTime" : "Runtime";
                     document = projectEngine.Process(sourceItem);
                     var diagnostics = new List<Diagnostic>();
 

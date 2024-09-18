@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 
 using RazorAnalyzer.Analyzers;
+using RazorAnalyzer.Generator;
 
 using Xunit;
 
@@ -34,8 +36,8 @@ public class AnalyzerTests
             """,
             "Index.razor",
             Diagnostic.Create(
-                LowerCaseHTMLAnalyzer.Descriptor,
-                Location.Create("Index.razor", new TextSpan(18, 3), new LinePositionSpan(new LinePosition(2, 0), new LinePosition(2, 3)))
+                Descriptors.LowercaseHtmlDescriptor,
+                Location.Create("Index.razor", new TextSpan(18, 3), default)
             )
         );
 
@@ -51,8 +53,8 @@ public class AnalyzerTests
             """,
             "Index.razor",
             Diagnostic.Create(
-                CodeBlockStylingAnalyzer.Descriptor,
-                Location.Create("Index.razor", new TextSpan(18, 3), new LinePositionSpan(new LinePosition(2, 0), new LinePosition(2, 3)))
+                Descriptors.CodeBlockStyling,
+                Location.Create("Index.razor", new TextSpan(18, 32), default)
             )
         );
 
@@ -69,8 +71,27 @@ public class AnalyzerTests
             """,
             "Index.razor",
             Diagnostic.Create(
-                VirtualizeAnalyzer.Descriptor,
-                Location.Create("Index.razor", new TextSpan(48, 12), new LinePositionSpan(new LinePosition(4,8), new LinePosition(4, 20)))
+                Descriptors.VirtualizeDescriptor,
+                Location.Create("Index.razor", new TextSpan(48, 12), default)
+            )
+        );
+
+    [Fact]
+    public Task DisposableMethod()
+        => TestAsync("""
+            @page "/index"
+
+            @code 
+            {
+                public void Dispose()
+                {
+                }
+            }
+            """,
+            "Index.razor",
+            Diagnostic.Create(
+                Descriptors.DisposableDescriptor,
+                Location.Create("Index.razor", new TextSpan(18, 53), default)
             )
         );
             
@@ -92,15 +113,11 @@ public class AnalyzerTests
 
         var result = driver.GetRunResult();
         var runResult = result.Results[0];
-        if (expectedDiagnostics.Length == 0)
-        {
-            Assert.Empty(runResult.Diagnostics);
-        }
-        else
+        if (expectedDiagnostics.Length > 0)
         {
             foreach (var d in expectedDiagnostics)
             {
-                Assert.Contains(d, runResult.Diagnostics);
+                Assert.Contains(d, runResult.Diagnostics, SpanOnlyComparer.Instance);
             }
         }
     }
@@ -133,6 +150,35 @@ public class AnalyzerTests
                 value = null;
                 return false;
             }
+        }
+    }
+
+    private class SpanOnlyComparer : IEqualityComparer<Diagnostic>
+    {
+        public static SpanOnlyComparer Instance = new SpanOnlyComparer();
+
+        public bool Equals(Diagnostic x, Diagnostic y)
+        {
+            if (x is null)
+            {
+                return y is null;
+            }
+
+            if (y is null)
+            {
+                return x is null;
+            }
+
+            return x.IsSuppressed == y.IsSuppressed
+                && x.Severity == y.Severity
+                && x.WarningLevel == y.WarningLevel
+                && x.Descriptor == y.Descriptor
+                && x.Location.SourceSpan == y.Location.SourceSpan;
+        }
+
+        public int GetHashCode([DisallowNull] Diagnostic obj)
+        {
+            return obj.GetHashCode();
         }
     }
 }

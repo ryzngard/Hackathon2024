@@ -14,14 +14,6 @@ namespace RazorAnalyzer.Analyzers;
 // https://github.com/dotnet/aspnetcore/issues/43102
 public class VirtualizeAnalyzer : IRazorAnalyzer
 {
-    public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
-        "T1003",
-        "Invalid parent for virtualize",
-        "Virtualize inserts a <div> element by default for spacer elements. Either specify a spacer element with SpacerElement=\"element\" or change the enclosing markup.",
-        "Style",
-        DiagnosticSeverity.Warning,
-        isEnabledByDefault: true);
-
     public IEnumerable<Diagnostic> GetDiagnostics(RazorCodeDocument document)
     {
         var root = document.GetSyntaxTree().Root;
@@ -44,7 +36,7 @@ public class VirtualizeAnalyzer : IRazorAnalyzer
             if (IsInvalidParent(containingBlock))
             {
                 yield return Diagnostic.Create(
-                    Descriptor,
+                    Descriptors.VirtualizeDescriptor,
                     virtualization.GetLocation(document.Source));
             }
         }

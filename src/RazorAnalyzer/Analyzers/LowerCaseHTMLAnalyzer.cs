@@ -11,16 +11,8 @@ using SyntaxToken = Microsoft.AspNetCore.Razor.Language.Syntax.SyntaxToken;
 
 namespace RazorAnalyzer.Analyzers;
 
-public class LowerCaseHTMLAnalyzer : IRazorAnalyzer
+public class LowercaseHTMLAnalyzer : IRazorAnalyzer
 {
-    public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
-        "T1000",
-        "Do not use uppercase html",
-        "Do not use uppercase html",
-        "Style",
-        DiagnosticSeverity.Warning,
-        isEnabledByDefault: true);
-
     public IEnumerable<Diagnostic> GetDiagnostics(RazorCodeDocument document)
     {
         var syntaxTree = document.GetSyntaxTree();
@@ -36,7 +28,7 @@ public class LowerCaseHTMLAnalyzer : IRazorAnalyzer
             if (hasUppercase)
             {
                 yield return Diagnostic.Create(
-                    Descriptor,
+                    Descriptors.LowercaseHtmlDescriptor,
                     tag.GetLocation(document.Source)
                     );
             }

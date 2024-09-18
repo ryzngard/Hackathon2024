@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Razor.Language;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal sealed class AllTagHelpers : IReadOnlyList<TagHelperDescriptor>
 {

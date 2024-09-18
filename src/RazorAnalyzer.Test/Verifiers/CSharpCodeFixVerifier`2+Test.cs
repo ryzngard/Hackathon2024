@@ -6,6 +6,8 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 
+using RazorAnalyzer.Generator;
+
 namespace RazorAnalyzer.Test
 {
     public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>

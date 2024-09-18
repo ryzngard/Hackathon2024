@@ -5,6 +5,8 @@ using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
 
+using RazorAnalyzer.Generator;
+
 namespace RazorAnalyzer.Test
 {
     public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>

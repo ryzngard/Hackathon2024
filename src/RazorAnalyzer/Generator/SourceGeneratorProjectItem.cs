@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.CodeAnalysis;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal class SourceGeneratorProjectItem : RazorProjectItem, IEquatable<SourceGeneratorProjectItem>
 {

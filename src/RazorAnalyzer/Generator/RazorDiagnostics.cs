@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.Text;
 
 using Microsoft.CodeAnalysis;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal static class RazorDiagnostics
 {

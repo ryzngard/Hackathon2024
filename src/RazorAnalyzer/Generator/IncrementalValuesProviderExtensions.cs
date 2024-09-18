@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace RazorAnalyzer;
+namespace RazorAnalyzer.Generator;
 
 internal static class IncrementalValuesProviderExtensions
 {

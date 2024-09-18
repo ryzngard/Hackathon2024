@@ -13,14 +13,6 @@ namespace RazorAnalyzer.Analyzers;
 
 public class CodeBlockStylingAnalyzer : IRazorAnalyzer
 {
-    public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
-        "T1002",
-        "Code block styling",
-        "Do not use a code block, instead use a code behind file",
-        "Style",
-        DiagnosticSeverity.Warning,
-        isEnabledByDefault: true);
-
     public IEnumerable<Diagnostic> GetDiagnostics(RazorCodeDocument document)
     {
         var syntaxTree = document.GetSyntaxTree();
@@ -29,7 +21,7 @@ public class CodeBlockStylingAnalyzer : IRazorAnalyzer
         if (root.DescendantNodesAndSelf().FirstOrDefault(IsRazorCodeDirective) is RazorDirectiveSyntax directiveSyntax)
         {
             yield return Diagnostic.Create(
-                Descriptor,
+                Descriptors.CodeBlockStyling,
                 directiveSyntax.GetLocation(document.Source)
             );
 
